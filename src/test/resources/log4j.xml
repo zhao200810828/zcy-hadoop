@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- 事务日志 -->
+    <appender name="event_log_file" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="log/hadoop_event.log"/>
+        <param name="DatePattern" value="'.'yyyyMMddHH'.${HOSTNAME}.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyyMMddHHmmss} %p %t %C{3} %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 应用普通日志 -->
+    <appender name="normal_log_file" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="log/hadoop_normal.log"/>
+        <param name="DatePattern" value=".yyyyMMddHH"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyyMMddHHmmss} %p %t %C{3} %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="console_log" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyyMMddHHmmss} %p %t %C{3} %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 事务日志等级，测试环境和生产环境都设置成info -->
+    <logger name="EventLog" additivity="false">
+        <level value="info"/>
+        <appender-ref ref="event_log_file"/>
+    </logger>
+
+    <!-- 分析日志等级，测试环境和生产环境都设置成info -->
+    <logger name="NormalLog" additivity="false">
+        <level value="info"/>
+        <appender-ref ref="normal_log_file"/>
+    </logger>
+
+    <!-- 除应用以外的第三方类库的（系统默认）日志等级，测试环境和生产环境都设置成warn -->
+    <root>
+        <level value="info"/>
+       <appender-ref ref="normal_log_file" />
+        <!--  <appender-ref ref="event_log_file" />
+         &lt;!&ndash; 测试环境可以取消注释 &ndash;&gt;
+         <appender-ref ref="console_log" />-->
+    </root>
+</log4j:configuration>
