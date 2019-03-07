@@ -28,9 +28,9 @@ public class WordCountDriver {
         Configuration conf = new Configuration();
         //如果是打包在linux上运行，则不需要写这两行代码
         //指定运行在yarn中
-    /*    conf.set("mapreduce.framework.name", "yarn");
+        conf.set("mapreduce.framework.name", "yarn");
         //指定resourcemanager的主机名
-        conf.set("yarn.resourcemanager.hostname", "test36");*/
+        conf.set("yarn.resourcemanager.hostname", "aiwm");
         //conf.addResource("config.xml");
         System.out.println("fs.defaultFS: "+conf.get("fs.defaultFS"));
 
@@ -54,11 +54,11 @@ public class WordCountDriver {
 
         //指定输入文件的位置，这里为了灵活，接收外部参数
         FileInputFormat.setInputPaths(job, new Path(args[0]));
-        //指定输入文件的位置，这里接收启动参数
+        //指定输出文件的位置
         Path outPath = new Path(args[1]);
         FileSystem fileSystem = outPath.getFileSystem(conf);
         if(fileSystem.exists(outPath)){
-            fileSystem.delete(outPath, true);// true的意思是，就算output有东西，也一带删除
+            fileSystem.delete(outPath, true);// true的意思是，就算output子文件夹，也一带删除
         }
         FileOutputFormat.setOutputPath(job, outPath);
 
