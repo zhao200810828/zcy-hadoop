@@ -43,7 +43,7 @@ public class TestHadoop {
         try {
             configuration.set(nameNodeName, nameNodeUrl);
             fs = FileSystem.get(configuration);
-            eventLog.info("连接成功：Path="+ fs.getFileStatus(new Path("/")));
+            logger.info("连接成功：Path={}", fs.getFileStatus(new Path("/")));
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
@@ -73,7 +73,7 @@ public class TestHadoop {
         //定义本地上传的文件路径
         String localFilePath = "D://";
         //定义上传文件
-        String fileName = "text.txt";
+        String fileName = "test2.txt";
         //定义要上传到的文件夹
         String uploadFolder = "/input/";
 
@@ -116,7 +116,7 @@ public class TestHadoop {
     public void deleteFile() throws Exception {
         FileSystem fs = connectHadoop();
         //要删除的文件路径
-        String deleteFilePath = "/input/text.txt";
+        String deleteFilePath = "/input/data.txt";
         Boolean deleteResult = fs.delete(new Path(deleteFilePath), true);
         logger.info("删除文件：={}", deleteResult);
     }

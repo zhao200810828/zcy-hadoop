@@ -4,7 +4,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     <!-- 事务日志 -->
     <appender name="event_log_file" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="log/hadoop_event.log"/>
+        <param name="File" value="log/hadoop_event_test.log"/>
         <param name="DatePattern" value="'.'yyyyMMddHH'.${HOSTNAME}.log'"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
@@ -14,7 +14,7 @@
 
     <!-- 应用普通日志 -->
     <appender name="normal_log_file" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="log/hadoop_normal.log"/>
+        <param name="File" value="log/hadoop_normal_test.log"/>
         <param name="DatePattern" value=".yyyyMMddHH"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
