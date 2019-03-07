@@ -31,7 +31,7 @@ public class WordCountDriver {
         /*conf.set("mapreduce.framework.name", "yarn");
         //指定resourcemanager的主机名
         conf.set("yarn.resourcemanager.hostname", "test36");*/
-        //conf.addResource("config.xml");
+        conf.addResource("config.xml");
         System.out.println("fs.defaultFS: "+conf.get("fs.defaultFS"));
 
         Job job = Job.getInstance(conf);
